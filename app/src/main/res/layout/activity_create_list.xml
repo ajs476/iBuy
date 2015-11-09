@@ -1,12 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/CreateList">
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listViewItems"
         android:choiceMode="singleChoice"
-        tools:listitem="@android:layout/simple_list_item_checked" />
+        tools:listitem="@android:layout/simple_list_item_checked"
+        android:layout_below="@+id/editTextAddItem"
+        android:layout_above="@+id/buttonSaveList" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextAddItem"
+        android:hint="Tap Here To Add Item"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Item"
+        android:id="@+id/buttonAddItem"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save List"
+        android:id="@+id/buttonSaveList"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/editTextAddItem"
+        android:layout_alignStart="@+id/editTextAddItem" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear List"
+        android:id="@+id/buttonClearList"
+        android:layout_below="@+id/listViewItems"
+        android:layout_toRightOf="@+id/buttonSaveList"
+        android:layout_toEndOf="@+id/buttonSaveList" />
+
 </RelativeLayout>
