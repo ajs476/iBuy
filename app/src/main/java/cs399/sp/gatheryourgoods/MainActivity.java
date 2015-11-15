@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,11 +20,29 @@ public class MainActivity extends AppCompatActivity {
         // create UI elements
         Button buttonCreate = (Button)findViewById(R.id.buttonCreate);
 
+        // create animations and listeners for button presses
+        final Animation shake = AnimationUtils.loadAnimation(this,R.anim.shake);
+        shake.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                startActivity(new Intent(MainActivity.this, CreateListActivity.class));
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
         // create button listeners
         buttonCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CreateListActivity.class));
+                v.startAnimation(shake);
             }
         });
 

@@ -3,4 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="name_hint">Item Name</string>
+    <string name="amount_hint">Item Amount</string>
+    <string name="category_hint">Item Category</string>
 </resources>

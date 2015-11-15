@@ -26,6 +26,7 @@ public class CreateListActivity extends AppCompatActivity {
     public CustomListAdapter myAdapter;
     public Context context;
     public Item noItem;
+    public boolean emptyFlag;
 
 
     @Override
@@ -50,15 +51,9 @@ public class CreateListActivity extends AppCompatActivity {
             noItem = new Item();
             noItem.setItemName("Your list is empty!");
             results.add(noItem);
+            emptyFlag = true;
         }
-        // create new item
-        //Item newItem = new Item();
-//        // set items details
-//        newItem.setItemName("paper");
-//        newItem.setItemAmount("4");
-//        newItem.setItemCategory("home");
-//        // add item with details to list
-//        results.add(newItem);
+
         // edit text field for adding item name
         addItemText = (EditText)findViewById(R.id.editTextAddItem);
         // edit text field for adding item category
@@ -105,12 +100,17 @@ public class CreateListActivity extends AppCompatActivity {
                             .show();
                 }
                 else {
-                    if(results.contains(noItem)){
-                        results.remove(noItem);
+                    // check if list is empty
+                    if(emptyFlag){
+                        // list is empty, make sure noItem is in it
+                        if(results.contains(noItem)){
+                            // no item was in list, remove and set emptyFlag to false
+                            results.remove(noItem);
+                            emptyFlag = false;
+                        }
                     }
                     // add new item to list
                     results.add(newItem);
-
                     // notify adapter that we changed the list
                     myAdapter.notifyDataSetChanged();
                 }
@@ -118,7 +118,6 @@ public class CreateListActivity extends AppCompatActivity {
         });
         // add the item and details to the list
         return results;
-
 
     }
 

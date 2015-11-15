@@ -5,48 +5,69 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:id="@+id/Main"
-    android:background="#ffffff">
+    android:background="#2196F3">
 
-    <TextView
+
+    <Button
+        android:id="@+id/buttonCreate"
+        android:text="Create"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gather Your Goods"
-        android:id="@+id/textViewTitle"
-        android:textSize="38dp"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="6"
+        android:shadowRadius="25"
+        android:layout_above="@+id/buttonLoad"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/buttonLoad"
+        android:text="Load"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="6"
+        android:shadowRadius="25"
+        android:layout_above="@+id/buttonShare"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/buttonShare"
+        android:text="Share"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="6"
+        android:shadowRadius="25"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/buttonLoad"
+        android:layout_alignStart="@+id/buttonLoad"
+        android:layout_marginTop="10dp" />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:id="@+id/imageView"
+        android:background="@drawable/title_logo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="81dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create List"
-        android:id="@+id/buttonCreate"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:background="#000cff"
-        android:textSize="36dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Load List"
-        android:id="@+id/buttonLoad"
-        android:layout_below="@+id/buttonCreate"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
-        android:textSize="36dp"
-        android:background="#0006ff" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Share List"
-        android:id="@+id/buttonShare"
-        android:layout_below="@+id/buttonLoad"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp"
-        android:textSize="36dp"
-        android:background="#0024ff" />
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp" />
 
 </RelativeLayout>
