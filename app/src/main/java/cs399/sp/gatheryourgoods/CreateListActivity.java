@@ -25,6 +25,7 @@ public class CreateListActivity extends AppCompatActivity {
     public String amountString;
     public CustomListAdapter myAdapter;
     public Context context;
+    public Item noItem;
 
 
     @Override
@@ -45,14 +46,19 @@ public class CreateListActivity extends AppCompatActivity {
     private ArrayList getListData(){
         // create list of item information to add
         final ArrayList<Item> results = new ArrayList<Item>();
+        if(results.isEmpty()){
+            noItem = new Item();
+            noItem.setItemName("Your list is empty!");
+            results.add(noItem);
+        }
         // create new item
-        Item newItem = new Item();
-        // set items details
-        newItem.setItemName("paper");
-        newItem.setItemAmount("4");
-        newItem.setItemCategory("home");
-        // add item with details to list
-        results.add(newItem);
+        //Item newItem = new Item();
+//        // set items details
+//        newItem.setItemName("paper");
+//        newItem.setItemAmount("4");
+//        newItem.setItemCategory("home");
+//        // add item with details to list
+//        results.add(newItem);
         // edit text field for adding item name
         addItemText = (EditText)findViewById(R.id.editTextAddItem);
         // edit text field for adding item category
@@ -69,7 +75,7 @@ public class CreateListActivity extends AppCompatActivity {
                 // grab category from Edit Text
                 category = addCategoryText.getText().toString();
                 // set items category
-                newItem.setItemCategory(category);
+                newItem.setItemCategory("Category: " + category);
                 // grab item from add item Edit Text
                 item = addItemText.getText().toString();
                 // set items name
@@ -77,7 +83,7 @@ public class CreateListActivity extends AppCompatActivity {
                 // grab item amount from edit text field
                 amountString = addAmountText.getText().toString();
                 // set item amount
-                newItem.setItemAmount(amountString);
+                newItem.setItemAmount("Amount: " + amountString);
 
                 // check that all fields have been completed for item
                 if (item.isEmpty() || category.isEmpty() || amountString.isEmpty()) {
@@ -99,8 +105,12 @@ public class CreateListActivity extends AppCompatActivity {
                             .show();
                 }
                 else {
+                    if(results.contains(noItem)){
+                        results.remove(noItem);
+                    }
                     // add new item to list
                     results.add(newItem);
+
                     // notify adapter that we changed the list
                     myAdapter.notifyDataSetChanged();
                 }

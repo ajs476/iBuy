@@ -9,7 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:typeface="sans" />
+        android:typeface="sans"
+        android:textColor="#343434"
+        android:textSize="32sp"/>
 
     <TextView
         android:id="@+id/category"
@@ -17,8 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
         android:layout_marginTop="5dp"
-        android:textColor="#343434"
-        android:textSize="12sp" />
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/amount"
@@ -28,7 +29,6 @@
         android:layout_alignBottom="@+id/category"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textColor="#343434"
-        android:textSize="12sp" />
+        android:textSize="22sp" />
 
 </RelativeLayout>
