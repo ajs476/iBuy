@@ -1,63 +1,117 @@
 package cs399.sp.gatheryourgoods;
 
-import android.content.Intent;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
 import java.util.ArrayList;
+
 
 /**
  * Created by Alex on 11/8/2015.
  */
 public class CreateListActivity extends AppCompatActivity {
-    public ArrayList<String> itemList;
     public EditText addItemText;
+    public EditText addCategoryText;
+    public EditText addAmountText;
     public Button addItemButton;
     public String item;
-    public ArrayAdapter<String> itemsAdapter;
+    public String category;
+    public String amountString;
+    public CustomListAdapter myAdapter;
+    public Context context;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = this;
         super.onCreate(savedInstanceState);
+        // set the current view
         setContentView(R.layout.activity_create_list);
+        // get item details from item list
+        ArrayList item_details = getListData();
+        // create list view object
+        final ListView lv1 = (ListView) findViewById(R.id.custom_list);
+        // create and set the adapter for the list view
+        lv1.setAdapter(myAdapter = new CustomListAdapter(this, item_details));
+    }
 
+    // grabs item details
+    private ArrayList getListData(){
+        // create list of item information to add
+        final ArrayList<Item> results = new ArrayList<Item>();
+        // create new item
+        Item newItem = new Item();
+        // set items details
+        newItem.setItemName("paper");
+        newItem.setItemAmount("4");
+        newItem.setItemCategory("home");
+        // add item with details to list
+        results.add(newItem);
+        // edit text field for adding item name
         addItemText = (EditText)findViewById(R.id.editTextAddItem);
+        // edit text field for adding item category
+        addCategoryText = (EditText)findViewById(R.id.editTextAddCategory);
+        // edit text field for adding item amount
+        addAmountText = (EditText)findViewById(R.id.editTextAddAmount);
+        // create add item button for user to press
         addItemButton = (Button)findViewById(R.id.buttonAddItem);
-
+        // set listener for add item button, to check for user clicks
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Item newItem = new Item();
+                // grab category from Edit Text
+                category = addCategoryText.getText().toString();
+                // set items category
+                newItem.setItemCategory(category);
+                // grab item from add item Edit Text
                 item = addItemText.getText().toString();
-                itemList.add(item);
-                itemsAdapter.notifyDataSetChanged();
+                // set items name
+                newItem.setItemName(item);
+                // grab item amount from edit text field
+                amountString = addAmountText.getText().toString();
+                // set item amount
+                newItem.setItemAmount(amountString);
 
+                // check that all fields have been completed for item
+                if (item.isEmpty() || category.isEmpty() || amountString.isEmpty()) {
+                    // display alert to user if fields are not empty
+                    new AlertDialog.Builder(context)
+                            .setTitle("Cannot add Item")
+                            .setMessage("Please enter an item Name, Category, and Amount.")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //do nothing, we just wanted to show the user the alert
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //do nothing, we just wanted to show the user the alert
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+                else {
+                    // add new item to list
+                    results.add(newItem);
+                    // notify adapter that we changed the list
+                    myAdapter.notifyDataSetChanged();
+                }
             }
         });
+        // add the item and details to the list
+        return results;
 
 
-        itemList = new ArrayList<String>();
-        // how to add to list:
-        itemList.add("Apples");
-
-
-
-
-
-
-        itemsAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, itemList);
-
-        ListView listView = (ListView) findViewById(R.id.listViewItems);
-        listView.setAdapter(itemsAdapter);
     }
+
 
     @Override
     public void onStart(){

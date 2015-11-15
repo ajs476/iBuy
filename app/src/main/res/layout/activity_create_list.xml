@@ -5,21 +5,22 @@
     android:id="@+id/CreateList">
 
     <ListView
-        android:layout_width="wrap_content"
+        android:id="@+id/custom_list"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listViewItems"
-        android:choiceMode="singleChoice"
-        tools:listitem="@android:layout/simple_list_item_checked"
-        android:layout_below="@+id/editTextAddItem"
-        android:layout_above="@+id/buttonSaveList" />
+        android:dividerHeight="1dp"
+        android:layout_above="@+id/buttonSaveList"
+        android:layout_below="@+id/buttonAddItem" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextAddItem"
-        android:hint="Tap Here To Add Item"
+        android:hint="Item Name"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:singleLine="true"
+        android:imeOptions="actionDone"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -27,9 +28,8 @@
         android:layout_height="wrap_content"
         android:text="Add Item"
         android:id="@+id/buttonAddItem"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/editTextAddCategory"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -37,16 +37,37 @@
         android:text="Save List"
         android:id="@+id/buttonSaveList"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/editTextAddItem"
-        android:layout_alignStart="@+id/editTextAddItem" />
+        android:layout_toRightOf="@+id/editTextAddItem"
+        android:layout_toEndOf="@+id/editTextAddItem" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Clear List"
         android:id="@+id/buttonClearList"
-        android:layout_below="@+id/listViewItems"
-        android:layout_toRightOf="@+id/buttonSaveList"
-        android:layout_toEndOf="@+id/buttonSaveList" />
+        android:layout_below="@+id/custom_list"
+        android:layout_toLeftOf="@+id/buttonAddItem"
+        android:layout_toStartOf="@+id/buttonAddItem" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextAddCategory"
+        android:hint="Item Category"
+        android:imeOptions="actionDone"
+        android:singleLine="true"
+        android:layout_below="@+id/editTextAddAmount"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextAddAmount"
+        android:hint="Amount"
+        android:inputType="number"
+        android:imeOptions="actionDone"
+        android:singleLine="true"
+        android:layout_below="@+id/editTextAddItem"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
