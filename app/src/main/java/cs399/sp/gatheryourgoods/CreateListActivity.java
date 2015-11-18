@@ -27,6 +27,7 @@ public class CreateListActivity extends AppCompatActivity {
     public Context context;
     public Item noItem;
     public boolean emptyFlag;
+    public ArrayList<Item> results;
 
 
     @Override
@@ -41,12 +42,37 @@ public class CreateListActivity extends AppCompatActivity {
         final ListView lv1 = (ListView) findViewById(R.id.custom_list);
         // create and set the adapter for the list view
         lv1.setAdapter(myAdapter = new CustomListAdapter(this, item_details));
+        Button clearButton = (Button)findViewById(R.id.buttonClearList);
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(context)
+                        .setTitle("Clear current list?")
+                        .setMessage("Are you sure you want to clear the current list?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                results.clear();
+                                results.add(noItem);
+                                myAdapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing since user clicked cancel
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+
+            }
+        });
     }
 
     // grabs item details
     private ArrayList getListData(){
         // create list of item information to add
-        final ArrayList<Item> results = new ArrayList<Item>();
+        results = new ArrayList<Item>();
         if(results.isEmpty()){
             noItem = new Item();
             noItem.setItemName("Your list is empty!");
