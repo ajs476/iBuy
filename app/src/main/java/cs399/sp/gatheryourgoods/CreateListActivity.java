@@ -6,9 +6,12 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 
@@ -40,9 +43,17 @@ public class CreateListActivity extends AppCompatActivity {
         ArrayList item_details = getListData();
         // create list view object
         final ListView lv1 = (ListView) findViewById(R.id.custom_list);
+        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Item entry = (Item)parent.getItemAtPosition(position);
+                Toast.makeText(CreateListActivity.this, "Clicked: "+entry.getItemName(), Toast.LENGTH_SHORT).show();
+            }
+        });
         // create and set the adapter for the list view
-        lv1.setAdapter(myAdapter = new CustomListAdapter(this, item_details));
+        lv1.setAdapter(myAdapter = new CustomListAdapter(this, results)); // might need item_details
         Button clearButton = (Button)findViewById(R.id.buttonClearList);
+        Button saveButton = (Button)findViewById(R.id.buttonSaveList);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,8 +74,26 @@ public class CreateListActivity extends AppCompatActivity {
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
-
-
+            }
+        });
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(context)
+                        .setTitle("Save current list?")
+                        .setMessage("Are you sure you want to save the current list?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // save list
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing since user clicked cancel
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
             }
         });
     }
