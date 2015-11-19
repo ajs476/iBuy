@@ -70,4 +70,13 @@
         android:layout_below="@+id/editTextAddItem"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Load"
+        android:id="@+id/buttonLoadList"
+        android:layout_below="@+id/custom_list"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

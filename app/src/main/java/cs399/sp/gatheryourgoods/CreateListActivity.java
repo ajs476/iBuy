@@ -3,6 +3,7 @@ package cs399.sp.gatheryourgoods;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -29,14 +30,14 @@ public class CreateListActivity extends AppCompatActivity {
     public EditText addCategoryText;
     public EditText addAmountText;
     public Button addItemButton;
-    public String item;
+    public String name;
     public String category;
     public String amountString;
     public String item_name, item_category, item_amount;
     //public String[] item_string_list;
     //public Set<String> mySet = new HashSet<String>(Arrays.asList(item_list_string));
     //public String item_string_list;
-    public String item_list_string;
+    public String item_list_string = "";
     public CustomListAdapter myAdapter;
     public Context context;
     public Item noItem;
@@ -45,6 +46,9 @@ public class CreateListActivity extends AppCompatActivity {
     public int list_size;
     public ArrayList<Item> results;
 
+    public SharedPreferences preferences;
+    public SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +56,16 @@ public class CreateListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // set the current view
         setContentView(R.layout.activity_create_list);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
         // get item details from item list
         ArrayList item_details = getListData();
+        Button loadList = (Button)findViewById(R.id.buttonLoadList);
+        loadList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CreateListActivity.this, LoadList.class));
+            }
+        });
         // create list view object
         final ListView lv1 = (ListView) findViewById(R.id.custom_list);
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -98,6 +110,9 @@ public class CreateListActivity extends AppCompatActivity {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // save list
+                                if(!item_list_string.isEmpty()){
+                                    clearData();
+                                }
                                 saveListString();
                                 saveListSharedPreferences();
                             }
@@ -140,18 +155,18 @@ public class CreateListActivity extends AppCompatActivity {
                 // grab category from Edit Text
                 category = addCategoryText.getText().toString();
                 // set items category
-                newItem.setItemCategory("Category: " + category);
+                newItem.setItemCategory(category);
                 // grab item from add item Edit Text
-                item = addItemText.getText().toString();
+                name = addItemText.getText().toString();
                 // set items name
-                newItem.setItemName(item);
+                newItem.setItemName(name);
                 // grab item amount from edit text field
                 amountString = addAmountText.getText().toString();
                 // set item amount
-                newItem.setItemAmount("Amount: " + amountString);
+                newItem.setItemAmount(amountString);
 
                 // check that all fields have been completed for item
-                if (item.isEmpty() || category.isEmpty() || amountString.isEmpty()) {
+                if (name.isEmpty() || category.isEmpty() || amountString.isEmpty()) {
                     // display alert to user if fields are not empty
                     new AlertDialog.Builder(context)
                             .setTitle("Cannot add Item")
@@ -221,26 +236,35 @@ public class CreateListActivity extends AppCompatActivity {
 
     public void saveListString(){
         list_size = results.size();
+        item_list_string = "";
+
         for(int i = 0; i<=list_size-1; i++){
+
             list_item = results.get(i);
             item_name = list_item.getItemName();
             item_category = list_item.getItemCategory();
             item_amount = list_item.getItemAmount();
-            item_list_string += item_name+",";
+            item_list_string += (item_name+",");
             item_list_string += item_category+"!";
             item_list_string += item_amount+"@";
-            Toast.makeText(CreateListActivity.this, "List String Saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CreateListActivity.this, "List String Saved as: "+item_list_string, Toast.LENGTH_LONG).show();
         }
     }
 
     public void saveListSharedPreferences(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = preferences.edit();
-        String itemList = PreferenceManager.getDefaultSharedPreferences(this).getString(item_list_string,"");
-        editor.putString(itemList,item_list_string);
+        String string_list = item_list_string;
+        editor = preferences.edit();
+        editor.putString("itemList", string_list);
         editor.apply();
         Toast.makeText(CreateListActivity.this, "List String Saved to preferences", Toast.LENGTH_SHORT).show();
     }
+
+    public void clearData(){
+        editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
 
 
 }

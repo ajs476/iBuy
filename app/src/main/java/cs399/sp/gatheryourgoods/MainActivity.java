@@ -12,6 +12,9 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    public boolean create_clicked = false;
+    public boolean load_clicked = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         // create UI elements
         Button buttonCreate = (Button)findViewById(R.id.buttonCreate);
+        Button buttonLoad = (Button)findViewById(R.id.buttonLoad);
 
         // create animations and listeners for button presses
         final Animation shake = AnimationUtils.loadAnimation(this,R.anim.shake);
@@ -30,7 +34,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                startActivity(new Intent(MainActivity.this, CreateListActivity.class));
+                if(create_clicked){
+                    create_clicked = false;
+                    startActivity(new Intent(MainActivity.this, CreateListActivity.class));
+                }
+                if(load_clicked){
+                    load_clicked = false;
+                    startActivity(new Intent(MainActivity.this, LoadList.class));
+                }
+
             }
 
             @Override
@@ -42,6 +54,16 @@ public class MainActivity extends AppCompatActivity {
         buttonCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                create_clicked = true;
+                load_clicked = false;
+                v.startAnimation(shake);
+            }
+        });
+        buttonLoad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                load_clicked = true;
+                create_clicked = false;
                 v.startAnimation(shake);
             }
         });
