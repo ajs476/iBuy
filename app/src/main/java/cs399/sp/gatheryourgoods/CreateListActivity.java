@@ -3,7 +3,9 @@ package cs399.sp.gatheryourgoods;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,7 +15,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -28,8 +33,10 @@ public class CreateListActivity extends AppCompatActivity {
     public String category;
     public String amountString;
     public String item_name, item_category, item_amount;
-    public String item_string_list;
-    public List<String> item_list_string = new ArrayList<String>();
+    //public String[] item_string_list;
+    //public Set<String> mySet = new HashSet<String>(Arrays.asList(item_list_string));
+    //public String item_string_list;
+    public String item_list_string;
     public CustomListAdapter myAdapter;
     public Context context;
     public Item noItem;
@@ -92,6 +99,7 @@ public class CreateListActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 // save list
                                 saveListString();
+                                saveListSharedPreferences();
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -218,11 +226,20 @@ public class CreateListActivity extends AppCompatActivity {
             item_name = list_item.getItemName();
             item_category = list_item.getItemCategory();
             item_amount = list_item.getItemAmount();
-            item_list_string.add(item_name);
-            item_list_string.add(item_category);
-            item_list_string.add(item_amount);
-            Toast.makeText(CreateListActivity.this, "List Saved", Toast.LENGTH_SHORT).show();
+            item_list_string += item_name+",";
+            item_list_string += item_category+"!";
+            item_list_string += item_amount+"@";
+            Toast.makeText(CreateListActivity.this, "List String Saved", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void saveListSharedPreferences(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        String itemList = PreferenceManager.getDefaultSharedPreferences(this).getString(item_list_string,"");
+        editor.putString(itemList,item_list_string);
+        editor.apply();
+        Toast.makeText(CreateListActivity.this, "List String Saved to preferences", Toast.LENGTH_SHORT).show();
     }
 
 
