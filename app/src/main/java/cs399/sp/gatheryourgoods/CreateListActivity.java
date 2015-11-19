@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -26,10 +27,15 @@ public class CreateListActivity extends AppCompatActivity {
     public String item;
     public String category;
     public String amountString;
+    public String item_name, item_category, item_amount;
+    public String item_string_list;
+    public List<String> item_list_string = new ArrayList<String>();
     public CustomListAdapter myAdapter;
     public Context context;
     public Item noItem;
+    public Item list_item;
     public boolean emptyFlag;
+    public int list_size;
     public ArrayList<Item> results;
 
 
@@ -85,6 +91,7 @@ public class CreateListActivity extends AppCompatActivity {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // save list
+                                saveListString();
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -202,6 +209,20 @@ public class CreateListActivity extends AppCompatActivity {
     public void onDestroy(){
         super.onDestroy();
 
+    }
+
+    public void saveListString(){
+        list_size = results.size();
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_name = list_item.getItemName();
+            item_category = list_item.getItemCategory();
+            item_amount = list_item.getItemAmount();
+            item_list_string.add(item_name);
+            item_list_string.add(item_category);
+            item_list_string.add(item_amount);
+            Toast.makeText(CreateListActivity.this, "List Saved", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
