@@ -1,6 +1,7 @@
 package cs399.sp.gatheryourgoods;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ public class LoadList extends AppCompatActivity {
 
     public ArrayList<Item> results2;
     public CustomListAdapter myAdapter;
+    public boolean isChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -55,8 +57,9 @@ public class LoadList extends AppCompatActivity {
         lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Item entry = (Item)parent.getItemAtPosition(position);
-                Toast.makeText(LoadList.this, "Clicked: " + entry.getItemName(), Toast.LENGTH_SHORT).show();
+                //Item entry = (Item)parent.getItemAtPosition(position);
+                //Toast.makeText(LoadList.this, "Clicked: " + entry.getItemName(), Toast.LENGTH_SHORT).show();
+
             }
         });
         // create and set the adapter for the list view

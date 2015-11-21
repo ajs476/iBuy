@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -44,14 +46,26 @@ public class CustomListAdapter extends BaseAdapter {
             holder.itemNameView = (TextView) convertView.findViewById(R.id.name);
             holder.itemCategoryView = (TextView) convertView.findViewById(R.id.category);
             holder.itemAmountView = (TextView) convertView.findViewById(R.id.amount);
+            holder.checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    int getPosition = (Integer)buttonView.getTag();
+                    listData.get(getPosition).setSelected(buttonView.isChecked());
+
+                }
+            });
             convertView.setTag(holder);
+            convertView.setTag(R.id.checkBox, holder.checkBox);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
+        holder.checkBox.setTag(position);
+        holder.checkBox.setChecked(listData.get(position).isSelected());
         holder.itemNameView.setText(listData.get(position).getItemName());
         holder.itemCategoryView.setText(listData.get(position).getItemCategory());
         holder.itemAmountView.setText(listData.get(position).getItemAmount());
+
         return convertView;
     }
 
@@ -59,5 +73,7 @@ public class CustomListAdapter extends BaseAdapter {
         TextView itemNameView;
         TextView itemCategoryView;
         TextView itemAmountView;
+        protected CheckBox checkBox;
+
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,7 @@ public class CreateListActivity extends AppCompatActivity {
     public Item noItem;
     public Item list_item;
     public boolean emptyFlag;
+    public boolean isChecked = false;
     public int list_size;
     public ArrayList<Item> results;
 
@@ -71,8 +73,9 @@ public class CreateListActivity extends AppCompatActivity {
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Item entry = (Item)parent.getItemAtPosition(position);
-                Toast.makeText(CreateListActivity.this, "Clicked: "+entry.getItemName(), Toast.LENGTH_SHORT).show();
+                //Item entry = (Item)parent.getItemAtPosition(position);
+                //Toast.makeText(CreateListActivity.this, "Clicked: "+entry.getItemName(), Toast.LENGTH_SHORT).show();
+
             }
         });
         // create and set the adapter for the list view
