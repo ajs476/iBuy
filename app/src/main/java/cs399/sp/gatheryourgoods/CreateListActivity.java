@@ -15,18 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 
 /**
  * Created by Alex on 11/8/2015.
  */
+
 public class CreateListActivity extends AppCompatActivity {
+
     public EditText addItemText;
     public EditText addCategoryText;
     public EditText addAmountText;
@@ -35,22 +31,16 @@ public class CreateListActivity extends AppCompatActivity {
     public String category;
     public String amountString;
     public String item_name, item_category, item_amount;
-    //public String[] item_string_list;
-    //public Set<String> mySet = new HashSet<String>(Arrays.asList(item_list_string));
-    //public String item_string_list;
     public String item_list_string = "";
     public CustomListAdapter myAdapter;
     public Context context;
-    public Item noItem;
+    public Item noItem = new Item();
     public Item list_item;
     public boolean emptyFlag;
-    public boolean isChecked = false;
     public int list_size;
     public ArrayList<Item> results;
-
     public SharedPreferences preferences;
     public SharedPreferences.Editor editor;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +63,30 @@ public class CreateListActivity extends AppCompatActivity {
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Item entry = (Item)parent.getItemAtPosition(position);
-                //Toast.makeText(CreateListActivity.this, "Clicked: "+entry.getItemName(), Toast.LENGTH_SHORT).show();
+                final Item entry = (Item)parent.getItemAtPosition(position);
+                new AlertDialog.Builder(context)
+                        .setTitle("Remove list item?")
+                        .setMessage("Are you sure you want to remove: "+entry.getItemName())
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                results.remove(entry);
+                                myAdapter.notifyDataSetChanged();
+                                if(results.isEmpty()){
+                                    results.add(noItem);
+                                    myAdapter.notifyDataSetChanged();
+                                    emptyFlag = true;
+                                }
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing since user clicked cancel
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
 
             }
         });
@@ -93,6 +105,7 @@ public class CreateListActivity extends AppCompatActivity {
                                 results.clear();
                                 results.add(noItem);
                                 myAdapter.notifyDataSetChanged();
+                                emptyFlag = true;
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -115,6 +128,7 @@ public class CreateListActivity extends AppCompatActivity {
                                 // save list
                                 if(!item_list_string.isEmpty()){
                                     clearData();
+
                                 }
                                 saveListString();
                                 saveListSharedPreferences();
@@ -136,7 +150,6 @@ public class CreateListActivity extends AppCompatActivity {
         // create list of item information to add
         results = new ArrayList<Item>();
         if(results.isEmpty()){
-            noItem = new Item();
             noItem.setItemName("Your list is empty!");
             results.add(noItem);
             emptyFlag = true;
@@ -190,12 +203,9 @@ public class CreateListActivity extends AppCompatActivity {
                 else {
                     // check if list is empty
                     if(emptyFlag){
-                        // list is empty, make sure noItem is in it
-                        if(results.contains(noItem)){
                             // no item was in list, remove and set emptyFlag to false
-                            results.remove(noItem);
-                            emptyFlag = false;
-                        }
+                        results.remove(noItem);
+                        emptyFlag = false;
                     }
                     // add new item to list
                     results.add(newItem);
