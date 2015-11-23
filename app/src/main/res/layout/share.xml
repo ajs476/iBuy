@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#2196F3">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share Created List"
+        android:text="Email List"
         android:id="@+id/buttonShareCreatedList"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/buttonshape2"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="6"
+        android:shadowRadius="25"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share your created list as an email using the button below"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:textSize="28dp"
+        android:gravity="center_horizontal"
+        android:textColor="#ffffff" />
 </RelativeLayout>
