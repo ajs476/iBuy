@@ -8,6 +8,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -24,7 +26,7 @@ public class ShareListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceBundle);
         setContentView(R.layout.share);
 
-
+        final Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String itemsList = preferences.getString("itemList", "");
         String delims = "[,!@]+";
@@ -55,7 +57,7 @@ public class ShareListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                    v.startAnimation(shake);
                     Log.i("Send email", "");
 
                     String[] TO = {""};

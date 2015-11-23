@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +52,7 @@ public class CreateListActivity extends AppCompatActivity {
     public Button cannedButton,bakingButton,breakfastButton,coffeeButton,snacksButton,condimentsButton,pastaButton;
     public Button hygieneButton,beautyButton,healthButton,homeButton;
     public static String itemCategory = "";
+    public static  Animation shake;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,7 @@ public class CreateListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // set the current view
         setContentView(R.layout.activity_create_list);
+        shake = AnimationUtils.loadAnimation(this, R.anim.shake);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         // get item details from item list
         ArrayList item_details = getListData();
@@ -105,6 +109,7 @@ public class CreateListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // custom dialog InitialSelection
+                v.startAnimation(shake);
                 final Dialog initialSelectionDialog = new Dialog(context);
                 initialSelectionDialog.setContentView(R.layout.initial_selection_alert);
                 initialSelectionDialog.setTitle("Category Selection");
@@ -120,6 +125,7 @@ public class CreateListActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         // on foodButton click
+                        v.startAnimation(shake);
                         initialSelectionDialog.dismiss();
                         // create dialog for food selection 1
                         final Dialog foodSelection1Dialog = new Dialog(context);
@@ -138,6 +144,7 @@ public class CreateListActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 // dairy button clicked
+                                v.startAnimation(shake);
                                 itemCategory = "Dairy";
                                 categoryText.setText(itemCategory);
                                 foodSelection1Dialog.dismiss();
@@ -147,6 +154,7 @@ public class CreateListActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 // produce button clicked
+                                v.startAnimation(shake);
                                 itemCategory = "Produce";
                                 categoryText.setText(itemCategory);
                                 foodSelection1Dialog.dismiss();
@@ -156,6 +164,7 @@ public class CreateListActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 // frozen button clicked
+                                v.startAnimation(shake);
                                 itemCategory = "Frozen";
                                 categoryText.setText(itemCategory);
                                 foodSelection1Dialog.dismiss();
@@ -165,6 +174,7 @@ public class CreateListActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 // deli button clicked
+                                v.startAnimation(shake);
                                 itemCategory = "Deli & Meat";
                                 categoryText.setText(itemCategory);
                                 foodSelection1Dialog.dismiss();
@@ -174,6 +184,7 @@ public class CreateListActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 // bread button clicked
+                                v.startAnimation(shake);
                                 itemCategory = "Bread & Bakery";
                                 categoryText.setText(itemCategory);
                                 foodSelection1Dialog.dismiss();
@@ -183,6 +194,7 @@ public class CreateListActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 // beverage button clicked
+                                v.startAnimation(shake);
                                 itemCategory = "Beverage";
                                 categoryText.setText(itemCategory);
                                 foodSelection1Dialog.dismiss();
@@ -192,6 +204,7 @@ public class CreateListActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 // dry button clicked
+                                v.startAnimation(shake);
                                 foodSelection1Dialog.dismiss();
                                 final Dialog foodSelection2Dialog = new Dialog(context);
                                 foodSelection2Dialog.setContentView(R.layout.food_selection_2);
@@ -209,6 +222,7 @@ public class CreateListActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         // canned button clicked
+                                        v.startAnimation(shake);
                                         itemCategory = "Canned";
                                         categoryText.setText(itemCategory);
                                         foodSelection2Dialog.dismiss();
@@ -218,6 +232,7 @@ public class CreateListActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         // baking button clicked
+                                        v.startAnimation(shake);
                                         itemCategory = "Baking";
                                         categoryText.setText(itemCategory);
                                         foodSelection2Dialog.dismiss();
@@ -227,6 +242,7 @@ public class CreateListActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         // breakfast button clicked
+                                        v.startAnimation(shake);
                                         itemCategory = "Breakfast & Cereal";
                                         categoryText.setText(itemCategory);
                                         foodSelection2Dialog.dismiss();
@@ -236,6 +252,7 @@ public class CreateListActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         // coffee button clicked
+                                        v.startAnimation(shake);
                                         itemCategory = "Coffee Tea & Cocoa";
                                         categoryText.setText(itemCategory);
                                         foodSelection2Dialog.dismiss();
@@ -245,6 +262,7 @@ public class CreateListActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         // snacks button clicked
+                                        v.startAnimation(shake);
                                         itemCategory = "Snacks & Candy";
                                         categoryText.setText(itemCategory);
                                         foodSelection2Dialog.dismiss();
@@ -254,6 +272,7 @@ public class CreateListActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         // condiments button clicked
+                                        v.startAnimation(shake);
                                         itemCategory = "Condiments";
                                         categoryText.setText(itemCategory);
                                         foodSelection2Dialog.dismiss();
@@ -263,6 +282,7 @@ public class CreateListActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         // pasta button clicked
+                                        v.startAnimation(shake);
                                         itemCategory = "Pasta Grains & Meal Solutions";
                                         categoryText.setText(itemCategory);
                                         foodSelection2Dialog.dismiss();
@@ -280,6 +300,7 @@ public class CreateListActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         // on nonFoodButton click
+                        v.startAnimation(shake);
                         initialSelectionDialog.dismiss();
                         final Dialog nonFoodSelectionDialog = new Dialog(context);
                         nonFoodSelectionDialog.setContentView(R.layout.non_food_selection_1);
@@ -294,6 +315,7 @@ public class CreateListActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 // hygiene button clicked
+                                v.startAnimation(shake);
                                 itemCategory = "Hygiene";
                                 categoryText.setText(itemCategory);
                                 nonFoodSelectionDialog.dismiss();
@@ -305,6 +327,7 @@ public class CreateListActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 // beauty button clicked
+                                v.startAnimation(shake);
                                 itemCategory = "Beauty";
                                 categoryText.setText(itemCategory);
                                 nonFoodSelectionDialog.dismiss();
@@ -315,6 +338,7 @@ public class CreateListActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 // health button clicked
+                                v.startAnimation(shake);
                                 itemCategory = "Health";
                                 categoryText.setText(itemCategory);
                                 nonFoodSelectionDialog.dismiss();
@@ -325,6 +349,7 @@ public class CreateListActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 // home button clicked
+                                v.startAnimation(shake);
                                 itemCategory = "Home";
                                 categoryText.setText(itemCategory);
                                 nonFoodSelectionDialog.dismiss();
@@ -339,6 +364,7 @@ public class CreateListActivity extends AppCompatActivity {
                 backButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        v.startAnimation(shake);
                         initialSelectionDialog.dismiss();
                     }
                 });
@@ -353,6 +379,7 @@ public class CreateListActivity extends AppCompatActivity {
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(shake);
                 new AlertDialog.Builder(context)
                         .setTitle("Clear current list?")
                         .setMessage("Are you sure you want to clear the current list?")
@@ -376,6 +403,7 @@ public class CreateListActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(shake);
                 new AlertDialog.Builder(context)
                         .setTitle("Save current list?")
                         .setMessage("Are you sure you want to save the current list?")
@@ -426,6 +454,7 @@ public class CreateListActivity extends AppCompatActivity {
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(shake);
                 Item newItem = new Item();
                 // grab category from Edit Text
                 category = itemCategory;
