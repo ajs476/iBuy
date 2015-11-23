@@ -1,6 +1,8 @@
 package cs399.sp.gatheryourgoods;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,17 +11,21 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     public boolean create_clicked = false;
     public boolean load_clicked = false;
     public boolean share_clicked = false;
-
+    public SharedPreferences preferences;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        checkList();
 
         // create UI elements
         Button buttonCreate = (Button)findViewById(R.id.buttonCreate);
@@ -46,13 +52,25 @@ public class MainActivity extends AppCompatActivity {
                     load_clicked = false;
                     create_clicked = false;
                     share_clicked = false;
-                    startActivity(new Intent(MainActivity.this, LoadList.class));
+                    if(!checkList()){
+                        Toast.makeText(MainActivity.this, "No list has been created...", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        startActivity(new Intent(MainActivity.this, LoadList.class));
+                    }
+
                 }
                 if(share_clicked){
                     share_clicked = false;
                     load_clicked = false;
                     create_clicked = false;
-                    startActivity(new Intent(MainActivity.this, ShareListActivity.class));
+                    if(!checkList()){
+                        Toast.makeText(MainActivity.this, "No list has been created...", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        startActivity(new Intent(MainActivity.this, ShareListActivity.class));
+                    }
+
                 }
 
             }
@@ -142,5 +160,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean checkList(){
+        // check if itemList has been saved in memory previously
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (preferences.contains("itemList")) {
+            return true;
+        }
+        return false;
     }
 }
