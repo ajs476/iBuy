@@ -23,6 +23,8 @@
             />
         <activity android:name=".InitialSelectionActivity"
             />
+        <activity android:name=".ShareListActivity"
+            />
 
     </application>
 

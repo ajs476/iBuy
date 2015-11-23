@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean create_clicked = false;
     public boolean load_clicked = false;
+    public boolean share_clicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         // create UI elements
         Button buttonCreate = (Button)findViewById(R.id.buttonCreate);
         Button buttonLoad = (Button)findViewById(R.id.buttonLoad);
+        Button buttonShare = (Button)findViewById(R.id.buttonShare);
 
         // create animations and listeners for button presses
         final Animation shake = AnimationUtils.loadAnimation(this,R.anim.shake);
@@ -36,11 +38,21 @@ public class MainActivity extends AppCompatActivity {
             public void onAnimationEnd(Animation animation) {
                 if(create_clicked){
                     create_clicked = false;
+                    share_clicked = false;
+                    load_clicked = false;
                     startActivity(new Intent(MainActivity.this, CreateListActivity.class));
                 }
                 if(load_clicked){
                     load_clicked = false;
+                    create_clicked = false;
+                    share_clicked = false;
                     startActivity(new Intent(MainActivity.this, LoadList.class));
+                }
+                if(share_clicked){
+                    share_clicked = false;
+                    load_clicked = false;
+                    create_clicked = false;
+                    startActivity(new Intent(MainActivity.this, ShareListActivity.class));
                 }
 
             }
@@ -56,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 create_clicked = true;
                 load_clicked = false;
+                share_clicked = false;
                 v.startAnimation(shake);
             }
         });
@@ -64,6 +77,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 load_clicked = true;
                 create_clicked = false;
+                share_clicked = false;
+                v.startAnimation(shake);
+            }
+        });
+        buttonShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                share_clicked = true;
+                create_clicked = false;
+                load_clicked = false;
                 v.startAnimation(shake);
             }
         });

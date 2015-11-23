@@ -21,6 +21,7 @@ public class LoadList extends AppCompatActivity {
     public ArrayList<Item> results2;
     public CustomListAdapter myAdapter;
     public boolean isChecked;
+    public static String[] tokens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){

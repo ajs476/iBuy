@@ -382,6 +382,7 @@ public class CreateListActivity extends AppCompatActivity {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // save list
+
                                 if(!item_list_string.isEmpty()){
                                     clearData();
 
@@ -406,7 +407,9 @@ public class CreateListActivity extends AppCompatActivity {
         // create list of item information to add
         results = new ArrayList<Item>();
         if(results.isEmpty()){
-            noItem.setItemName("Your list is empty!");
+            noItem.setItemName("Your list is empty");
+            noItem.setItemAmount("0");
+            noItem.setItemCategory("Home");
             results.add(noItem);
             emptyFlag = true;
         }
@@ -704,10 +707,15 @@ public class CreateListActivity extends AppCompatActivity {
 
     public void saveListSharedPreferences(){
         String string_list = item_list_string;
-        editor = preferences.edit();
-        editor.putString("itemList", string_list);
-        editor.apply();
-        Toast.makeText(CreateListActivity.this, "List String Saved to preferences", Toast.LENGTH_SHORT).show();
+        if(!string_list.contains("Your list is empty")){
+            editor = preferences.edit();
+            editor.putString("itemList", string_list);
+            editor.apply();
+            Toast.makeText(CreateListActivity.this, "List String Saved to preferences", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(CreateListActivity.this, "Cannot save empty list...", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void clearData(){
