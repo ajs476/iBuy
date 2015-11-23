@@ -21,6 +21,8 @@
             />
         <activity android:name=".LoadList"
             />
+        <activity android:name=".InitialSelectionActivity"
+            />
 
     </application>
 

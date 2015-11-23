@@ -1,6 +1,7 @@
 package cs399.sp.gatheryourgoods;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
@@ -33,7 +35,6 @@ public class CreateListActivity extends AppCompatActivity {
     public String item_name, item_category, item_amount;
     public String item_list_string = "";
     public CustomListAdapter myAdapter;
-    public Context context;
     public Item noItem = new Item();
     public Item list_item;
     public boolean emptyFlag;
@@ -41,6 +42,14 @@ public class CreateListActivity extends AppCompatActivity {
     public ArrayList<Item> results;
     public SharedPreferences preferences;
     public SharedPreferences.Editor editor;
+    public Context context;
+    public Button foodButton;
+    public Button nonFoodButton;
+    public Button backButton;
+    public Button dairyButton,produceButton,frozenButton,deliButton,breadButton,beverageButton,dryButton;
+    public Button cannedButton,bakingButton,breakfastButton,coffeeButton,snacksButton,condimentsButton,pastaButton;
+    public Button hygieneButton,beautyButton,healthButton,homeButton;
+    public static String itemCategory = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +60,7 @@ public class CreateListActivity extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         // get item details from item list
         ArrayList item_details = getListData();
+        Button setCategoryButton = (Button)findViewById(R.id.buttonSetCategory);
         Button loadList = (Button)findViewById(R.id.buttonLoadList);
         loadList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +98,234 @@ public class CreateListActivity extends AppCompatActivity {
                         .show();
 
 
+            }
+        });
+        setCategoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // custom dialog InitialSelection
+                final Dialog initialSelectionDialog = new Dialog(context);
+                initialSelectionDialog.setContentView(R.layout.initial_selection_alert);
+                initialSelectionDialog.setTitle("Category Selection");
+                TextView dialogDescription = (TextView) initialSelectionDialog.findViewById(R.id.textViewDialogDescription);
+                dialogDescription.setText("Select your item's category using the buttons below");
+
+
+                foodButton = (Button)initialSelectionDialog.findViewById(R.id.buttonFood);
+                nonFoodButton = (Button)initialSelectionDialog.findViewById(R.id.buttonNonFood);
+                backButton = (Button)initialSelectionDialog.findViewById(R.id.buttonBack);
+
+                foodButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // on foodButton click
+                        initialSelectionDialog.dismiss();
+                        // create dialog for food selection 1
+                        final Dialog foodSelection1Dialog = new Dialog(context);
+                        foodSelection1Dialog.setContentView(R.layout.food_selection_1);
+                        foodSelection1Dialog.setTitle("Food Category Selection");
+
+                        dairyButton = (Button)foodSelection1Dialog.findViewById(R.id.buttonDairy);
+                        produceButton = (Button)foodSelection1Dialog.findViewById(R.id.buttonProduce);
+                        frozenButton = (Button)foodSelection1Dialog.findViewById(R.id.buttonFrozen);
+                        deliButton = (Button)foodSelection1Dialog.findViewById(R.id.buttonDeli);
+                        breadButton = (Button)foodSelection1Dialog.findViewById(R.id.buttonBread);
+                        beverageButton = (Button)foodSelection1Dialog.findViewById(R.id.buttonBeverage);
+                        dryButton = (Button)foodSelection1Dialog.findViewById(R.id.buttonDry);
+
+                        dairyButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // dairy button clicked
+                                itemCategory = "Dairy";
+                                foodSelection1Dialog.dismiss();
+                            }
+                        });
+                        produceButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // produce button clicked
+                                itemCategory = "Produce";
+                                foodSelection1Dialog.dismiss();
+                            }
+                        });
+                        frozenButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // frozen button clicked
+                                itemCategory = "Frozen";
+                                foodSelection1Dialog.dismiss();
+                            }
+                        });
+                        deliButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // deli button clicked
+                                itemCategory = "Deli & Meat";
+                                foodSelection1Dialog.dismiss();
+                            }
+                        });
+                        breadButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // bread button clicked
+                                itemCategory = "Bread & Bakery";
+                                foodSelection1Dialog.dismiss();
+                            }
+                        });
+                        beverageButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // beverage button clicked
+                                itemCategory = "Beverage";
+                                foodSelection1Dialog.dismiss();
+                            }
+                        });
+                        dryButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // dry button clicked
+                                foodSelection1Dialog.dismiss();
+                                final Dialog foodSelection2Dialog = new Dialog(context);
+                                foodSelection2Dialog.setContentView(R.layout.food_selection_2);
+                                foodSelection2Dialog.setTitle("Food Category Selection");
+
+                                cannedButton = (Button)foodSelection2Dialog.findViewById(R.id.buttonCanned);
+                                bakingButton = (Button)foodSelection2Dialog.findViewById(R.id.buttonBaking);
+                                breakfastButton = (Button)foodSelection2Dialog.findViewById(R.id.buttonBreakfast);
+                                coffeeButton = (Button)foodSelection2Dialog.findViewById(R.id.buttonCoffee);
+                                snacksButton = (Button)foodSelection2Dialog.findViewById(R.id.buttonSnacks);
+                                condimentsButton = (Button)foodSelection2Dialog.findViewById(R.id.buttonCondiments);
+                                pastaButton = (Button)foodSelection2Dialog.findViewById(R.id.buttonPasta);
+
+                                cannedButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        // canned button clicked
+                                        itemCategory = "Canned";
+                                        foodSelection2Dialog.dismiss();
+                                    }
+                                });
+                                bakingButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        // baking button clicked
+                                        itemCategory = "Baking";
+                                        foodSelection2Dialog.dismiss();
+                                    }
+                                });
+                                breakfastButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        // breakfast button clicked
+                                        itemCategory = "Breakfast & Cereal";
+                                        foodSelection2Dialog.dismiss();
+                                    }
+                                });
+                                coffeeButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        // coffee button clicked
+                                        itemCategory = "Coffee Tea & Cocoa";
+                                        foodSelection2Dialog.dismiss();
+                                    }
+                                });
+                                snacksButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        // snacks button clicked
+                                        itemCategory = "Snacks & Candy";
+                                        foodSelection2Dialog.dismiss();
+                                    }
+                                });
+                                condimentsButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        // condiments button clicked
+                                        itemCategory = "Condiments";
+                                        foodSelection2Dialog.dismiss();
+                                    }
+                                });
+                                pastaButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        // pasta button clicked
+                                        itemCategory = "Pasta Grains & Meal Solutions";
+                                        foodSelection2Dialog.dismiss();
+                                    }
+                                });
+                                foodSelection2Dialog.show();
+                            }
+                        });
+                        foodSelection1Dialog.show();
+                    }
+
+                });
+
+                nonFoodButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // on nonFoodButton click
+                        initialSelectionDialog.dismiss();
+                        final Dialog nonFoodSelectionDialog = new Dialog(context);
+                        nonFoodSelectionDialog.setContentView(R.layout.non_food_selection_1);
+                        nonFoodSelectionDialog.setTitle("Non-Food Category Selection");
+
+                        hygieneButton = (Button)nonFoodSelectionDialog.findViewById(R.id.buttonHygiene);
+                        beautyButton = (Button)nonFoodSelectionDialog.findViewById(R.id.buttonBeauty);
+                        healthButton = (Button)nonFoodSelectionDialog.findViewById(R.id.buttonHealth);
+                        homeButton = (Button)nonFoodSelectionDialog.findViewById(R.id.buttonHome);
+
+                        hygieneButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // hygiene button clicked
+                                itemCategory = "Hygiene";
+                                nonFoodSelectionDialog.dismiss();
+
+                            }
+                        });
+
+                        beautyButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // beauty button clicked
+                                itemCategory = "Beauty";
+                                nonFoodSelectionDialog.dismiss();
+                            }
+                        });
+
+                        healthButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // health button clicked
+                                itemCategory = "Health";
+                                nonFoodSelectionDialog.dismiss();
+                            }
+                        });
+
+                        homeButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // home button clicked
+                                itemCategory = "Home";
+                                nonFoodSelectionDialog.dismiss();
+                            }
+                        });
+
+                        nonFoodSelectionDialog.show();
+
+                    }
+                });
+
+                backButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        initialSelectionDialog.dismiss();
+                    }
+                });
+
+                initialSelectionDialog.show();
             }
         });
         // create and set the adapter for the list view
@@ -158,7 +396,7 @@ public class CreateListActivity extends AppCompatActivity {
         // edit text field for adding item name
         addItemText = (EditText)findViewById(R.id.editTextAddItem);
         // edit text field for adding item category
-        addCategoryText = (EditText)findViewById(R.id.editTextAddCategory);
+        //addCategoryText = (EditText)findViewById(R.id.editTextAddCategory);
         // edit text field for adding item amount
         addAmountText = (EditText)findViewById(R.id.editTextAddAmount);
         // create add item button for user to press
@@ -169,7 +407,7 @@ public class CreateListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Item newItem = new Item();
                 // grab category from Edit Text
-                category = addCategoryText.getText().toString();
+                category = itemCategory;
                 // set items category
                 newItem.setItemCategory(category);
                 // grab item from add item Edit Text
@@ -190,6 +428,7 @@ public class CreateListActivity extends AppCompatActivity {
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     //do nothing, we just wanted to show the user the alert
+
                                 }
                             })
                             .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

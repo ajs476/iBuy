@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:text="Add Item"
         android:id="@+id/buttonAddItem"
-        android:layout_below="@+id/editTextAddCategory"
+        android:layout_below="@+id/buttonSetCategory"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -49,12 +49,11 @@
         android:layout_toLeftOf="@+id/buttonAddItem"
         android:layout_toStartOf="@+id/buttonAddItem" />
 
-    <EditText
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextAddCategory"
-        android:hint="@string/category_hint"
-        android:imeOptions="actionDone"
+        android:id="@+id/buttonSetCategory"
+        android:text="Set Category"
         android:singleLine="true"
         android:layout_below="@+id/editTextAddAmount"
         android:layout_centerHorizontal="true" />

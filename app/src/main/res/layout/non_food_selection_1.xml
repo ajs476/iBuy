@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#2196F3">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Beauty"
+        android:id="@+id/buttonBeauty"
+        android:width="250dp"
+        android:minHeight="100dp"
+        android:layout_below="@+id/buttonHygiene"
+        android:layout_alignLeft="@+id/buttonHygiene"
+        android:layout_alignStart="@+id/buttonHygiene"
+        android:textSize="26dp"
+        android:textColor="#FFFFFF"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="6"
+        android:shadowRadius="25"
+        android:background="@drawable/buttonshape2"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Health"
+        android:id="@+id/buttonHealth"
+        android:layout_below="@+id/buttonBeauty"
+        android:layout_centerHorizontal="true"
+        android:width="250dp"
+        android:minHeight="100dp"
+        android:textSize="26dp"
+        android:textColor="#FFFFFF"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="6"
+        android:shadowRadius="25"
+        android:background="@drawable/buttonshape2"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hygiene"
+        android:id="@+id/buttonHygiene"
+        android:width="250dp"
+        android:minHeight="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/buttonHealth"
+        android:layout_alignStart="@+id/buttonHealth"
+        android:layout_marginTop="48dp"
+        android:textSize="26dp"
+        android:textColor="#FFFFFF"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="6"
+        android:shadowRadius="25"
+        android:background="@drawable/buttonshape2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:id="@+id/buttonHome"
+        android:width="250dp"
+        android:minHeight="100dp"
+        android:layout_below="@+id/buttonHealth"
+        android:layout_centerHorizontal="true"
+        android:textSize="26dp"
+        android:textColor="#FFFFFF"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="6"
+        android:shadowRadius="25"
+        android:background="@drawable/buttonshape2"
+        android:layout_marginTop="10dp" />
+</RelativeLayout>
