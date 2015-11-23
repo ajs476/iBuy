@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class CreateListActivity extends AppCompatActivity {
 
     public EditText addItemText;
-    public EditText addCategoryText;
+    public EditText categoryText;
     public EditText addAmountText;
     public Button addItemButton;
     public String name;
@@ -61,13 +61,14 @@ public class CreateListActivity extends AppCompatActivity {
         // get item details from item list
         ArrayList item_details = getListData();
         Button setCategoryButton = (Button)findViewById(R.id.buttonSetCategory);
-        Button loadList = (Button)findViewById(R.id.buttonLoadList);
-        loadList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CreateListActivity.this, LoadList.class));
-            }
-        });
+        categoryText = (EditText)findViewById(R.id.editTextCategory);
+//        Button loadList = (Button)findViewById(R.id.buttonLoadList);
+//        loadList.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(CreateListActivity.this, LoadList.class));
+//            }
+//        });
         // create list view object
         final ListView lv1 = (ListView) findViewById(R.id.custom_list);
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -138,6 +139,7 @@ public class CreateListActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 // dairy button clicked
                                 itemCategory = "Dairy";
+                                categoryText.setText(itemCategory);
                                 foodSelection1Dialog.dismiss();
                             }
                         });
@@ -146,6 +148,7 @@ public class CreateListActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 // produce button clicked
                                 itemCategory = "Produce";
+                                categoryText.setText(itemCategory);
                                 foodSelection1Dialog.dismiss();
                             }
                         });
@@ -154,6 +157,7 @@ public class CreateListActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 // frozen button clicked
                                 itemCategory = "Frozen";
+                                categoryText.setText(itemCategory);
                                 foodSelection1Dialog.dismiss();
                             }
                         });
@@ -162,6 +166,7 @@ public class CreateListActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 // deli button clicked
                                 itemCategory = "Deli & Meat";
+                                categoryText.setText(itemCategory);
                                 foodSelection1Dialog.dismiss();
                             }
                         });
@@ -170,6 +175,7 @@ public class CreateListActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 // bread button clicked
                                 itemCategory = "Bread & Bakery";
+                                categoryText.setText(itemCategory);
                                 foodSelection1Dialog.dismiss();
                             }
                         });
@@ -178,6 +184,7 @@ public class CreateListActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 // beverage button clicked
                                 itemCategory = "Beverage";
+                                categoryText.setText(itemCategory);
                                 foodSelection1Dialog.dismiss();
                             }
                         });
@@ -203,6 +210,7 @@ public class CreateListActivity extends AppCompatActivity {
                                     public void onClick(View v) {
                                         // canned button clicked
                                         itemCategory = "Canned";
+                                        categoryText.setText(itemCategory);
                                         foodSelection2Dialog.dismiss();
                                     }
                                 });
@@ -211,6 +219,7 @@ public class CreateListActivity extends AppCompatActivity {
                                     public void onClick(View v) {
                                         // baking button clicked
                                         itemCategory = "Baking";
+                                        categoryText.setText(itemCategory);
                                         foodSelection2Dialog.dismiss();
                                     }
                                 });
@@ -219,6 +228,7 @@ public class CreateListActivity extends AppCompatActivity {
                                     public void onClick(View v) {
                                         // breakfast button clicked
                                         itemCategory = "Breakfast & Cereal";
+                                        categoryText.setText(itemCategory);
                                         foodSelection2Dialog.dismiss();
                                     }
                                 });
@@ -227,6 +237,7 @@ public class CreateListActivity extends AppCompatActivity {
                                     public void onClick(View v) {
                                         // coffee button clicked
                                         itemCategory = "Coffee Tea & Cocoa";
+                                        categoryText.setText(itemCategory);
                                         foodSelection2Dialog.dismiss();
                                     }
                                 });
@@ -235,6 +246,7 @@ public class CreateListActivity extends AppCompatActivity {
                                     public void onClick(View v) {
                                         // snacks button clicked
                                         itemCategory = "Snacks & Candy";
+                                        categoryText.setText(itemCategory);
                                         foodSelection2Dialog.dismiss();
                                     }
                                 });
@@ -243,6 +255,7 @@ public class CreateListActivity extends AppCompatActivity {
                                     public void onClick(View v) {
                                         // condiments button clicked
                                         itemCategory = "Condiments";
+                                        categoryText.setText(itemCategory);
                                         foodSelection2Dialog.dismiss();
                                     }
                                 });
@@ -251,6 +264,7 @@ public class CreateListActivity extends AppCompatActivity {
                                     public void onClick(View v) {
                                         // pasta button clicked
                                         itemCategory = "Pasta Grains & Meal Solutions";
+                                        categoryText.setText(itemCategory);
                                         foodSelection2Dialog.dismiss();
                                     }
                                 });
@@ -281,6 +295,7 @@ public class CreateListActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 // hygiene button clicked
                                 itemCategory = "Hygiene";
+                                categoryText.setText(itemCategory);
                                 nonFoodSelectionDialog.dismiss();
 
                             }
@@ -291,6 +306,7 @@ public class CreateListActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 // beauty button clicked
                                 itemCategory = "Beauty";
+                                categoryText.setText(itemCategory);
                                 nonFoodSelectionDialog.dismiss();
                             }
                         });
@@ -300,6 +316,7 @@ public class CreateListActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 // health button clicked
                                 itemCategory = "Health";
+                                categoryText.setText(itemCategory);
                                 nonFoodSelectionDialog.dismiss();
                             }
                         });
@@ -309,6 +326,7 @@ public class CreateListActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 // home button clicked
                                 itemCategory = "Home";
+                                categoryText.setText(itemCategory);
                                 nonFoodSelectionDialog.dismiss();
                             }
                         });
@@ -438,22 +456,26 @@ public class CreateListActivity extends AppCompatActivity {
                             })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
-                }
-                else {
+                } else {
                     // check if list is empty
-                    if(emptyFlag){
-                            // no item was in list, remove and set emptyFlag to false
+                    if (emptyFlag) {
+                        // no item was in list, remove and set emptyFlag to false
                         results.remove(noItem);
                         emptyFlag = false;
                     }
                     // add new item to list
                     results.add(newItem);
+                    addItemText.getText().clear();
+                    addAmountText.getText().clear();
+                    categoryText.getText().clear();
                     // notify adapter that we changed the list
                     myAdapter.notifyDataSetChanged();
                 }
             }
         });
         // add the item and details to the list
+
+
         return results;
 
     }
@@ -490,16 +512,193 @@ public class CreateListActivity extends AppCompatActivity {
         list_size = results.size();
         item_list_string = "";
 
+        // grab item category and put in list according to category
         for(int i = 0; i<=list_size-1; i++){
-
             list_item = results.get(i);
-            item_name = list_item.getItemName();
             item_category = list_item.getItemCategory();
-            item_amount = list_item.getItemAmount();
-            item_list_string += (item_name+",");
-            item_list_string += item_category+"!";
-            item_list_string += item_amount+"@";
-            Toast.makeText(CreateListActivity.this, "List String Saved as: "+item_list_string, Toast.LENGTH_LONG).show();
+            if(item_category.equals("Produce")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Bread & Bakery")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Deli & Meat")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Condiments")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Beverage")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Pasta Grains & Meal Solutions")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Canned")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Baking")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Snacks & Candy")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Frozen")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Breakfast & Cereal")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Coffee Tea & Cocoa")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Dairy")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Hygiene")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Health")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Beauty")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
+        }
+        for(int i = 0; i<=list_size-1; i++){
+            list_item = results.get(i);
+            item_category = list_item.getItemCategory();
+            if(item_category.equals("Home")){
+                item_name = list_item.getItemName();
+                item_amount = list_item.getItemAmount();
+                item_list_string += (item_name+",");
+                item_list_string += item_category+"!";
+                item_list_string += item_amount+"@";
+            }
         }
     }
 

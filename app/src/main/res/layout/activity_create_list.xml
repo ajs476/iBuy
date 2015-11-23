@@ -2,13 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:id="@+id/CreateList">
+    android:id="@+id/CreateList"
+    android:background="#2196F3">
 
     <ListView
         android:id="@+id/custom_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:dividerHeight="2dp"
+        android:background="#ffffff"
         android:layout_above="@+id/buttonSaveList"
         android:layout_below="@+id/buttonAddItem" />
 
@@ -16,11 +18,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextAddItem"
+        android:textColorHint="#FFFFFF"
         android:hint="@string/name_hint"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:singleLine="true"
-        android:imeOptions="actionDone"/>
+        android:imeOptions="actionDone"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/editTextAddAmount"
+        android:layout_alignStart="@+id/editTextAddAmount"
+        android:layout_alignRight="@+id/editTextAddAmount"
+        android:layout_alignEnd="@+id/editTextAddAmount"
+        android:textColor="#ffffff" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -28,26 +35,51 @@
         android:layout_height="wrap_content"
         android:text="Add Item"
         android:id="@+id/buttonAddItem"
-        android:layout_below="@+id/buttonSetCategory"
-        android:layout_centerHorizontal="true" />
+        android:background="@drawable/buttonshape2"
+        android:layout_below="@+id/editTextCategory"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="6"
+        android:shadowRadius="25"
+        android:textColor="#ffffff"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save List"
         android:id="@+id/buttonSaveList"
+        android:background="@drawable/buttonshape2"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/editTextAddItem"
-        android:layout_toEndOf="@+id/editTextAddItem" />
+        android:layout_alignLeft="@+id/buttonAddItem"
+        android:layout_alignStart="@+id/buttonAddItem"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="6"
+        android:shadowRadius="25"
+        android:textColor="#ffffff"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Clear List"
         android:id="@+id/buttonClearList"
-        android:layout_below="@+id/custom_list"
-        android:layout_toLeftOf="@+id/buttonAddItem"
-        android:layout_toStartOf="@+id/buttonAddItem" />
+        android:background="@drawable/buttonshape2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/buttonSetCategory"
+        android:layout_alignStart="@+id/buttonSetCategory"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="6"
+        android:shadowRadius="25"
+        android:textColor="#ffffff"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -55,27 +87,40 @@
         android:id="@+id/buttonSetCategory"
         android:text="Set Category"
         android:singleLine="true"
-        android:layout_below="@+id/editTextAddAmount"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignBottom="@+id/buttonAddItem"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextAddAmount"
+        android:textColorHint="#FFFFFF"
         android:hint="@string/amount_hint"
         android:inputType="number"
         android:imeOptions="actionDone"
         android:singleLine="true"
         android:layout_below="@+id/editTextAddItem"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignLeft="@+id/editTextCategory"
+        android:layout_alignStart="@+id/editTextCategory"
+        android:layout_alignRight="@+id/editTextCategory"
+        android:layout_alignEnd="@+id/editTextCategory"
+        android:textColor="#ffffff" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Load"
-        android:id="@+id/buttonLoadList"
-        android:layout_below="@+id/custom_list"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/editTextCategory"
+        android:textColorHint="#FFFFFF"
+        android:hint="Category: Not Set"
+        android:layout_below="@+id/editTextAddAmount"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/buttonSaveList"
+        android:layout_toLeftOf="@+id/buttonSaveList"
+        android:focusable="false"
+        android:clickable="false"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>

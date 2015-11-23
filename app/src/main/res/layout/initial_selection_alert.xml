@@ -37,7 +37,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select a cateogry for your item using the buttons below"
+        android:text="Select a category for your item using the buttons below"
         android:id="@+id/textViewDialogDescription"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
