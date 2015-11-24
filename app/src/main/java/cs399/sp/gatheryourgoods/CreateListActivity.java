@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -67,42 +68,9 @@ public class CreateListActivity extends AppCompatActivity {
 
         // get item details from item list
         ArrayList item_details = getListData();
-        Button setCategoryButton = (Button)findViewById(R.id.buttonSetCategory);
+
         categoryText = (EditText)findViewById(R.id.editTextCategory);
-
-        // create list view object
-        final ListView lv1 = (ListView) findViewById(R.id.custom_list);
-        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Item entry = (Item)parent.getItemAtPosition(position);
-                new AlertDialog.Builder(context)
-                        .setTitle("Remove list item?")
-                        .setMessage("Are you sure you want to remove: "+entry.getItemName())
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                results.remove(entry);
-                                myAdapter.notifyDataSetChanged();
-                                if(results.isEmpty()){
-                                    results.add(noItem);
-                                    myAdapter.notifyDataSetChanged();
-                                    emptyFlag = true;
-                                }
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // do nothing since user clicked cancel
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
-
-
-            }
-        });
-        setCategoryButton.setOnClickListener(new View.OnClickListener() {
+        categoryText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // custom dialog InitialSelection
@@ -366,6 +334,41 @@ public class CreateListActivity extends AppCompatActivity {
                 initialSelectionDialog.show();
             }
         });
+
+
+        // create list view object
+        final ListView lv1 = (ListView) findViewById(R.id.custom_list);
+        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final Item entry = (Item)parent.getItemAtPosition(position);
+                new AlertDialog.Builder(context)
+                        .setTitle("Remove list item?")
+                        .setMessage("Are you sure you want to remove: "+entry.getItemName())
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                results.remove(entry);
+                                myAdapter.notifyDataSetChanged();
+                                if(results.isEmpty()){
+                                    results.add(noItem);
+                                    myAdapter.notifyDataSetChanged();
+                                    emptyFlag = true;
+                                }
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing since user clicked cancel
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+
+            }
+        });
+
         // create and set the adapter for the list view
         lv1.setAdapter(myAdapter = new CustomListAdapter(this, results)); // might need item_details
         Button clearButton = (Button)findViewById(R.id.buttonClearList);
@@ -438,6 +441,7 @@ public class CreateListActivity extends AppCompatActivity {
 
         // edit text field for adding item name
         addItemText = (EditText)findViewById(R.id.editTextAddItem);
+
         // edit text field for adding item category
         //addCategoryText = (EditText)findViewById(R.id.editTextAddCategory);
         // edit text field for adding item amount

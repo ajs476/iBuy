@@ -21,8 +21,6 @@
             />
         <activity android:name=".LoadList"
             />
-        <activity android:name=".ShareListActivity"
-            />
 
     </application>
 
