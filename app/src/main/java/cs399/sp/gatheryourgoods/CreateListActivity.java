@@ -4,9 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +23,7 @@ import java.util.ArrayList;
  * Created by Alex on 11/8/2015.
  */
 
+// purpose: allow user to create, save, and clear lists using Item objects
 public class CreateListActivity extends AppCompatActivity {
 
     public EditText addItemText;
@@ -58,21 +57,19 @@ public class CreateListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         context = this;
         super.onCreate(savedInstanceState);
+
         // set the current view
         setContentView(R.layout.activity_create_list);
+
+        //create animation and preferences
         shake = AnimationUtils.loadAnimation(this, R.anim.shake);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
         // get item details from item list
         ArrayList item_details = getListData();
         Button setCategoryButton = (Button)findViewById(R.id.buttonSetCategory);
         categoryText = (EditText)findViewById(R.id.editTextCategory);
-//        Button loadList = (Button)findViewById(R.id.buttonLoadList);
-//        loadList.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(CreateListActivity.this, LoadList.class));
-//            }
-//        });
+
         // create list view object
         final ListView lv1 = (ListView) findViewById(R.id.custom_list);
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -355,9 +352,7 @@ public class CreateListActivity extends AppCompatActivity {
                                 nonFoodSelectionDialog.dismiss();
                             }
                         });
-
                         nonFoodSelectionDialog.show();
-
                     }
                 });
 
@@ -368,7 +363,6 @@ public class CreateListActivity extends AppCompatActivity {
                         initialSelectionDialog.dismiss();
                     }
                 });
-
                 initialSelectionDialog.show();
             }
         });
@@ -474,7 +468,7 @@ public class CreateListActivity extends AppCompatActivity {
                     // display alert to user if fields are not empty
                     new AlertDialog.Builder(context)
                             .setTitle("Cannot add Item")
-                            .setMessage("Please enter an item Name, Category, and Amount.")
+                            .setMessage("Please enter an item Name, Category, and Amount to add an item.")
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     //do nothing, we just wanted to show the user the alert
@@ -506,10 +500,7 @@ public class CreateListActivity extends AppCompatActivity {
             }
         });
         // add the item and details to the list
-
-
         return results;
-
     }
 
 
