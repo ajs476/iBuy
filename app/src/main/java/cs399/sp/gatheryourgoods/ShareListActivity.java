@@ -16,6 +16,7 @@ import android.widget.Toast;
 /**
  * Created by Alex on 11/22/2015.
  */
+// purpose: allow users to share their list as text using messenger application
 public class ShareListActivity extends AppCompatActivity {
 
 
@@ -26,7 +27,9 @@ public class ShareListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceBundle);
         setContentView(R.layout.share);
 
+        // load animation
         final Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        // load data from preferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String itemsList = preferences.getString("itemList", "");
         String delims = "[,!@]+";
@@ -48,41 +51,38 @@ public class ShareListActivity extends AppCompatActivity {
             // grab item amounts
             amtlist = tokens[i+2];
             newItem.setItemAmount(amtlist);
+            // create email string message
             email += namelist+": "+amtlist+" ("+catlist+")\n";
         }
 
-
+        // create share button
         Button shareListButton = (Button)findViewById(R.id.buttonShareCreatedList);
         shareListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                    // create email intent on share button press
                     v.startAnimation(shake);
                     Log.i("Send email", "");
-
                     String[] TO = {""};
-                    //String[] CC = {"xyz@gmail.com"};
                     Intent emailIntent = new Intent(Intent.ACTION_SEND);
                     emailIntent.setData(Uri.parse("mailto:"));
                     emailIntent.setType("text/plain");
-
-
                     emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-                    //emailIntent.putExtra(Intent.EXTRA_CC, CC);
                     emailIntent.putExtra(Intent.EXTRA_SUBJECT, "GatherYourGoods List");
                     emailIntent.putExtra(Intent.EXTRA_TEXT, email);
 
+                    // make sure user has messenger app to share list with
                     try {
-                        startActivity(Intent.createChooser(emailIntent, "Share "));
+                        startActivity(Intent.createChooser(emailIntent, "Share your list using... "));
                         finish();
                         Log.i("Finished sending email.", "");
                     } catch (android.content.ActivityNotFoundException ex) {
                         Toast.makeText(ShareListActivity.this,
                                 "There is no email client installed.", Toast.LENGTH_SHORT).show();
-
                 }
             }
         });
     }
-    }
+}
 

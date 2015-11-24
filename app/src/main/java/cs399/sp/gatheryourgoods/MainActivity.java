@@ -5,14 +5,13 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Toast;
 
+// purpose: create main menu activity for app
 public class MainActivity extends AppCompatActivity {
 
     public boolean create_clicked = false;
@@ -25,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // check if previous list exists or not
         checkList();
 
         // create UI elements
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+            // decide what to do after button animations finish
             @Override
             public void onAnimationEnd(Animation animation) {
                 if(create_clicked){
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
                     else{
                         startActivity(new Intent(MainActivity.this, LoadList.class));
                     }
-
                 }
                 if(share_clicked){
                     share_clicked = false;
@@ -70,9 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     else{
                         startActivity(new Intent(MainActivity.this, ShareListActivity.class));
                     }
-
                 }
-
             }
 
             @Override
@@ -140,32 +138,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
+    // checking if list exists
     public boolean checkList(){
         // check if itemList has been saved in memory previously
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (preferences.contains("itemList")) {
+        if(preferences.contains("itemList")) {
             return true;
         }
         return false;
