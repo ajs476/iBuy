@@ -56,19 +56,19 @@
         android:layout_alignLeft="@+id/buttonLoad"
         android:layout_alignStart="@+id/buttonLoad"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="30dp" />
 
     <ImageView
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:id="@+id/imageView"
         android:background="@drawable/title_logo"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_margin="10dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        />
 
 </RelativeLayout>
