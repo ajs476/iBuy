@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                             amtlist = tokens[i+2];
                             newItem.setItemAmount(amtlist);
                             // create email string message
-                            email += namelist+": "+amtlist+" ("+catlist+")\n";
+                            email += namelist.substring(0,1).toUpperCase() + namelist.substring(1)+": "+amtlist+" ("+catlist+")\n";
                         }
                                 // create email intent on share button press
                                 Log.i("Send email", "");

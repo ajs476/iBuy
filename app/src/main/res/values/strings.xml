@@ -3,7 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="name_hint">Add Item Name</string>
-    <string name="amount_hint">Add Item Amount</string>
-    <string name="category_hint">Item Category</string>
+    <string name="name_hint">Tap To Add Item Name</string>
+    <string name="amount_hint">Tap To Add Item Amount</string>
+    <string name="category_hint">Tap To Add Item Category</string>
 </resources>

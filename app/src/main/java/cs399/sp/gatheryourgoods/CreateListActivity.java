@@ -735,7 +735,7 @@ public class CreateListActivity extends AppCompatActivity {
             editor = preferences.edit();
             editor.putString("itemList", string_list);
             editor.apply();
-            Toast.makeText(CreateListActivity.this, "List String Saved to preferences", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CreateListActivity.this, "List Saved Successfully!", Toast.LENGTH_SHORT).show();
         }
         else{
             Toast.makeText(CreateListActivity.this, "Cannot save empty list...", Toast.LENGTH_SHORT).show();
