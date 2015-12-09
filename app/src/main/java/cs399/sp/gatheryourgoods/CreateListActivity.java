@@ -31,9 +31,9 @@ public class CreateListActivity extends AppCompatActivity {
     public EditText categoryText;
     public EditText addAmountText;
     public Button addItemButton;
-    public String name;
-    public String category;
-    public String amountString;
+    public String name = "";
+    public String category = "";
+    public String amountString = "";
     public String item_name, item_category, item_amount;
     public String item_list_string = "";
     public CustomListAdapter myAdapter;
@@ -45,6 +45,7 @@ public class CreateListActivity extends AppCompatActivity {
     public SharedPreferences preferences;
     public SharedPreferences.Editor editor;
     public Context context;
+    public Button newItemButton;
     public Button foodButton;
     public Button nonFoodButton;
     public Button backButton;
@@ -61,6 +62,7 @@ public class CreateListActivity extends AppCompatActivity {
 
         // set the current view
         setContentView(R.layout.activity_create_list);
+
 
         //create animation and preferences
         shake = AnimationUtils.loadAnimation(this, R.anim.shake);
@@ -453,6 +455,9 @@ public class CreateListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.startAnimation(shake);
+
+
+
                 Item newItem = new Item();
                 // grab category from Edit Text
                 category = itemCategory;
@@ -471,11 +476,12 @@ public class CreateListActivity extends AppCompatActivity {
                 if (name.isEmpty() || category.isEmpty() || amountString.isEmpty()) {
                     // display alert to user if fields are not empty
                     new AlertDialog.Builder(context)
-                            .setTitle("Cannot add Item")
-                            .setMessage("Please enter an item Name, Category, and Amount to add an item.")
+                            .setTitle("Add a new item?")
+                            .setMessage("You will be prompted to enter your items name, amount, and category. Press submit after the prompt to add your item to the list.")
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    //do nothing, we just wanted to show the user the alert
+                                    //prompt user for item info
+                                    addItemName();
 
                                 }
                             })
@@ -747,6 +753,377 @@ public class CreateListActivity extends AppCompatActivity {
         editor.clear();
         editor.apply();
     }
+
+    public void addItemName(){
+        // bring up alert to fill out items name
+        final EditText itemNameText = new EditText(this);
+        new AlertDialog.Builder(context)
+                .setTitle("What is the items name?")
+                .setMessage("Please enter an item name.")
+                .setView(itemNameText)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // save items name
+                        name = itemNameText.getText().toString();
+                        addItemText.setText(name);
+                        if(!name.isEmpty()){
+                            addItemAmount();
+                        }
+
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing, we just wanted to show the user the alert
+
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    public void addItemAmount(){
+        // bring up alert to fill out items name
+        //addAmountText = (EditText)findViewById(R.id.editTextAddAmount);
+        final EditText itemAmountText = new EditText(this);
+        new AlertDialog.Builder(context)
+                .setTitle("How many of this item?")
+                .setMessage("Please enter the number of these items you need.")
+                .setView(itemAmountText)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // save items amount
+                        amountString = itemAmountText.getText().toString();
+                        addAmountText.setText(amountString);
+
+                        if (!amountString.isEmpty()) {
+                            addItemCategory();
+                        }
+
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing, we just wanted to show the user the alert
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    public void addItemCategory(){
+        // bring up alert to fill out items category
+        final Dialog initialSelectionDialog = new Dialog(context);
+        initialSelectionDialog.setContentView(R.layout.initial_selection_alert);
+        initialSelectionDialog.setTitle("Category Selection");
+        TextView dialogDescription = (TextView) initialSelectionDialog.findViewById(R.id.textViewDialogDescription);
+        dialogDescription.setText("Select your item's category using the buttons below");
+
+
+        foodButton = (Button)initialSelectionDialog.findViewById(R.id.buttonFood);
+        nonFoodButton = (Button)initialSelectionDialog.findViewById(R.id.buttonNonFood);
+        backButton = (Button)initialSelectionDialog.findViewById(R.id.buttonBack);
+
+        foodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // on foodButton click
+                v.startAnimation(shake);
+                initialSelectionDialog.dismiss();
+                // create dialog for food selection 1
+                final Dialog foodSelection1Dialog = new Dialog(context);
+                foodSelection1Dialog.setContentView(R.layout.food_selection_1);
+                foodSelection1Dialog.setTitle("Food Category Selection");
+
+                dairyButton = (Button)foodSelection1Dialog.findViewById(R.id.buttonDairy);
+                produceButton = (Button)foodSelection1Dialog.findViewById(R.id.buttonProduce);
+                frozenButton = (Button)foodSelection1Dialog.findViewById(R.id.buttonFrozen);
+                deliButton = (Button)foodSelection1Dialog.findViewById(R.id.buttonDeli);
+                breadButton = (Button)foodSelection1Dialog.findViewById(R.id.buttonBread);
+                beverageButton = (Button)foodSelection1Dialog.findViewById(R.id.buttonBeverage);
+                dryButton = (Button)foodSelection1Dialog.findViewById(R.id.buttonDry);
+
+                dairyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // dairy button clicked
+                        v.startAnimation(shake);
+                        itemCategory = "Dairy";
+                        categoryText.setText(itemCategory);
+                        saveItemDetails();
+                        foodSelection1Dialog.dismiss();
+                    }
+                });
+                produceButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // produce button clicked
+                        v.startAnimation(shake);
+                        itemCategory = "Produce";
+                        categoryText.setText(itemCategory);
+                        saveItemDetails();
+                        foodSelection1Dialog.dismiss();
+                    }
+                });
+                frozenButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // frozen button clicked
+                        v.startAnimation(shake);
+                        itemCategory = "Frozen";
+                        categoryText.setText(itemCategory);
+                        saveItemDetails();
+                        foodSelection1Dialog.dismiss();
+                    }
+                });
+                deliButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // deli button clicked
+                        v.startAnimation(shake);
+                        itemCategory = "Deli & Meat";
+                        categoryText.setText(itemCategory);
+                        saveItemDetails();
+                        foodSelection1Dialog.dismiss();
+                    }
+                });
+                breadButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // bread button clicked
+                        v.startAnimation(shake);
+                        itemCategory = "Bread & Bakery";
+                        categoryText.setText(itemCategory);
+                        saveItemDetails();
+                        foodSelection1Dialog.dismiss();
+                    }
+                });
+                beverageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // beverage button clicked
+                        v.startAnimation(shake);
+                        itemCategory = "Beverage";
+                        categoryText.setText(itemCategory);
+                        saveItemDetails();
+                        foodSelection1Dialog.dismiss();
+                    }
+                });
+                dryButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // dry button clicked
+                        v.startAnimation(shake);
+                        foodSelection1Dialog.dismiss();
+                        final Dialog foodSelection2Dialog = new Dialog(context);
+                        foodSelection2Dialog.setContentView(R.layout.food_selection_2);
+                        foodSelection2Dialog.setTitle("Food Category Selection");
+
+                        cannedButton = (Button)foodSelection2Dialog.findViewById(R.id.buttonCanned);
+                        bakingButton = (Button)foodSelection2Dialog.findViewById(R.id.buttonBaking);
+                        breakfastButton = (Button)foodSelection2Dialog.findViewById(R.id.buttonBreakfast);
+                        coffeeButton = (Button)foodSelection2Dialog.findViewById(R.id.buttonCoffee);
+                        snacksButton = (Button)foodSelection2Dialog.findViewById(R.id.buttonSnacks);
+                        condimentsButton = (Button)foodSelection2Dialog.findViewById(R.id.buttonCondiments);
+                        pastaButton = (Button)foodSelection2Dialog.findViewById(R.id.buttonPasta);
+
+                        cannedButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // canned button clicked
+                                v.startAnimation(shake);
+                                itemCategory = "Canned";
+                                categoryText.setText(itemCategory);
+                                saveItemDetails();
+                                foodSelection2Dialog.dismiss();
+                            }
+                        });
+                        bakingButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // baking button clicked
+                                v.startAnimation(shake);
+                                itemCategory = "Baking";
+                                categoryText.setText(itemCategory);
+                                saveItemDetails();
+                                foodSelection2Dialog.dismiss();
+                            }
+                        });
+                        breakfastButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // breakfast button clicked
+                                v.startAnimation(shake);
+                                itemCategory = "Breakfast & Cereal";
+                                categoryText.setText(itemCategory);
+                                saveItemDetails();
+                                foodSelection2Dialog.dismiss();
+                            }
+                        });
+                        coffeeButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // coffee button clicked
+                                v.startAnimation(shake);
+                                itemCategory = "Coffee Tea & Cocoa";
+                                categoryText.setText(itemCategory);
+                                saveItemDetails();
+                                foodSelection2Dialog.dismiss();
+                            }
+                        });
+                        snacksButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // snacks button clicked
+                                v.startAnimation(shake);
+                                itemCategory = "Snacks & Candy";
+                                categoryText.setText(itemCategory);
+                                saveItemDetails();
+                                foodSelection2Dialog.dismiss();
+                            }
+                        });
+                        condimentsButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // condiments button clicked
+                                v.startAnimation(shake);
+                                itemCategory = "Condiments";
+                                categoryText.setText(itemCategory);
+                                saveItemDetails();
+                                foodSelection2Dialog.dismiss();
+                            }
+                        });
+                        pastaButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // pasta button clicked
+                                v.startAnimation(shake);
+                                itemCategory = "Pasta Grains & Meal Solutions";
+                                categoryText.setText(itemCategory);
+                                saveItemDetails();
+                                foodSelection2Dialog.dismiss();
+                            }
+                        });
+                        foodSelection2Dialog.show();
+                    }
+                });
+                foodSelection1Dialog.show();
+            }
+
+        });
+
+        nonFoodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // on nonFoodButton click
+                v.startAnimation(shake);
+                initialSelectionDialog.dismiss();
+                final Dialog nonFoodSelectionDialog = new Dialog(context);
+                nonFoodSelectionDialog.setContentView(R.layout.non_food_selection_1);
+                nonFoodSelectionDialog.setTitle("Non-Food Category Selection");
+
+                hygieneButton = (Button) nonFoodSelectionDialog.findViewById(R.id.buttonHygiene);
+                beautyButton = (Button) nonFoodSelectionDialog.findViewById(R.id.buttonBeauty);
+                healthButton = (Button) nonFoodSelectionDialog.findViewById(R.id.buttonHealth);
+                homeButton = (Button) nonFoodSelectionDialog.findViewById(R.id.buttonHome);
+
+                hygieneButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // hygiene button clicked
+                        v.startAnimation(shake);
+                        itemCategory = "Hygiene";
+                        categoryText.setText(itemCategory);
+                        saveItemDetails();
+                        nonFoodSelectionDialog.dismiss();
+
+                    }
+                });
+
+                beautyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // beauty button clicked
+                        v.startAnimation(shake);
+                        itemCategory = "Beauty";
+                        categoryText.setText(itemCategory);
+                        saveItemDetails();
+                        nonFoodSelectionDialog.dismiss();
+                    }
+                });
+
+                healthButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // health button clicked
+                        v.startAnimation(shake);
+                        itemCategory = "Health";
+                        categoryText.setText(itemCategory);
+                        saveItemDetails();
+                        nonFoodSelectionDialog.dismiss();
+                    }
+                });
+
+                homeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // home button clicked
+                        v.startAnimation(shake);
+                        itemCategory = "Home";
+                        categoryText.setText(itemCategory);
+                        saveItemDetails();
+                        nonFoodSelectionDialog.dismiss();
+                    }
+                });
+                nonFoodSelectionDialog.show();
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(shake);
+                initialSelectionDialog.dismiss();
+            }
+        });
+        initialSelectionDialog.show();
+
+        category = categoryText.getText().toString();
+
+
+
+    }
+
+    public void saveItemDetails(){
+        if (emptyFlag) {
+            // no item was in list, remove and set emptyFlag to false
+            results.remove(noItem);
+            emptyFlag = false;
+        }
+        category = categoryText.getText().toString();
+        Item newItem = new Item();
+        // grab category from Edit Text
+        category = itemCategory;
+        // set items category
+        newItem.setItemCategory(category);
+        // grab item from add item Edit Text
+        name = addItemText.getText().toString();
+        // set items name
+        newItem.setItemName(name);
+        // grab item amount from edit text field
+        amountString = addAmountText.getText().toString();
+        // set item amount
+        newItem.setItemAmount(amountString);
+        // add new item to list
+        results.add(newItem);
+        addItemText.getText().clear();
+        addAmountText.getText().clear();
+        categoryText.getText().clear();
+        // notify adapter that we changed the list
+        myAdapter.notifyDataSetChanged();
+    }
+
 
 
 

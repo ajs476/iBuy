@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:dividerHeight="2dp"
         android:background="#ffffff"
-        android:layout_above="@+id/buttonSaveList"
-        android:layout_below="@+id/buttonAddItem" />
+        android:layout_above="@+id/button"
+        android:layout_below="@+id/editTextCategory" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -22,18 +22,19 @@
         android:hint="@string/name_hint"
         android:singleLine="true"
         android:imeOptions="actionDone"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/editTextAddAmount"
-        android:layout_alignStart="@+id/editTextAddAmount"
         android:textColor="#ffffff"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/buttonAddItem"
-        android:layout_toStartOf="@+id/buttonAddItem" />
+        android:layout_toStartOf="@+id/buttonAddItem"
+        android:paddingLeft="10dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:text="New Item"
         android:id="@+id/buttonAddItem"
         android:background="@drawable/buttonshape2"
         android:shadowColor="#000000"
@@ -41,46 +42,51 @@
         android:shadowDy="6"
         android:shadowRadius="25"
         android:textColor="#ffffff"
-        android:layout_alignBottom="@+id/editTextCategory"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp" />
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="18dp"
+        android:drawableLeft="@drawable/ic_create_white_24dp"
+        android:drawableStart="@drawable/ic_create_white_24dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="20dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save List"
         android:id="@+id/buttonSaveList"
-        android:background="@drawable/buttonshape2"
+        android:background="@drawable/ic_save_white_24dp"
         android:shadowColor="#000000"
         android:shadowDx="0"
         android:shadowDy="6"
         android:shadowRadius="25"
         android:textColor="#ffffff"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp" />
+        android:minWidth="55dp"
+        android:minHeight="55dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="5dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clear List"
         android:id="@+id/buttonClearList"
-        android:background="@drawable/buttonshape2"
+        android:background="@drawable/ic_delete_white_24dp"
         android:shadowColor="#000000"
         android:shadowDx="0"
         android:shadowDy="6"
         android:shadowRadius="25"
         android:textColor="#ffffff"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="5dp" />
+        android:minWidth="55dp"
+        android:minHeight="55dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/buttonSaveList"
+        android:layout_toStartOf="@+id/buttonSaveList"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -91,27 +97,39 @@
         android:inputType="number"
         android:imeOptions="actionDone"
         android:singleLine="true"
-        android:layout_below="@+id/editTextAddItem"
-        android:layout_alignLeft="@+id/editTextCategory"
-        android:layout_alignStart="@+id/editTextCategory"
         android:textColor="#ffffff"
+        android:layout_below="@+id/editTextAddItem"
+        android:layout_alignLeft="@+id/editTextAddItem"
+        android:layout_alignStart="@+id/editTextAddItem"
         android:layout_toLeftOf="@+id/buttonAddItem"
-        android:layout_toStartOf="@+id/buttonAddItem" />
+        android:layout_toStartOf="@+id/buttonAddItem"
+        android:paddingLeft="10dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextCategory"
         android:textColorHint="#FFFFFF"
-        android:hint="Tap to Add Item Category"
-        android:layout_below="@+id/editTextAddAmount"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:hint="@string/category_hint"
         android:focusable="false"
         android:clickable="false"
         android:textColor="#ffffff"
         android:focusableInTouchMode="false"
-        android:layout_toLeftOf="@+id/buttonAddItem"
-        android:layout_toStartOf="@+id/buttonAddItem" />
+        android:layout_below="@+id/editTextAddAmount"
+        android:layout_alignLeft="@+id/editTextAddAmount"
+        android:layout_alignStart="@+id/editTextAddAmount"
+        android:layout_alignRight="@+id/editTextAddAmount"
+        android:layout_alignEnd="@+id/editTextAddAmount"
+        android:paddingLeft="10dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#2196F3"
+        android:visibility="invisible" />
 
 </RelativeLayout>
