@@ -8,10 +8,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -757,8 +759,12 @@ public class CreateListActivity extends AppCompatActivity {
     public void addItemName(){
         // bring up alert to fill out items name
         final EditText itemNameText = new EditText(this);
+        itemNameText.setInputType(InputType.TYPE_CLASS_TEXT);
+        itemNameText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         new AlertDialog.Builder(context)
-                .setTitle("What is the items name?")
+                .setTitle("Item Name")
                 .setMessage("Please enter an item name.")
                 .setView(itemNameText)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -780,12 +786,18 @@ public class CreateListActivity extends AppCompatActivity {
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+
+
     }
 
     public void addItemAmount(){
         // bring up alert to fill out items name
         //addAmountText = (EditText)findViewById(R.id.editTextAddAmount);
         final EditText itemAmountText = new EditText(this);
+        itemAmountText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        itemAmountText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         new AlertDialog.Builder(context)
                 .setTitle("How many of this item?")
                 .setMessage("Please enter the number of these items you need.")

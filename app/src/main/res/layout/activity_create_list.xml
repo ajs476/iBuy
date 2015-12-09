@@ -12,7 +12,8 @@
         android:dividerHeight="2dp"
         android:background="#ffffff"
         android:layout_above="@+id/button"
-        android:layout_below="@+id/editTextCategory" />
+        android:layout_below="@+id/buttonSaveList"
+        android:paddingTop="50dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -28,7 +29,9 @@
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/buttonAddItem"
         android:layout_toStartOf="@+id/buttonAddItem"
-        android:paddingLeft="10dp" />
+        android:paddingLeft="10dp"
+        android:visibility="invisible"
+        android:text="List Preview" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -103,7 +106,8 @@
         android:layout_alignStart="@+id/editTextAddItem"
         android:layout_toLeftOf="@+id/buttonAddItem"
         android:layout_toStartOf="@+id/buttonAddItem"
-        android:paddingLeft="10dp" />
+        android:paddingLeft="10dp"
+        android:visibility="invisible" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -120,7 +124,8 @@
         android:layout_alignStart="@+id/editTextAddAmount"
         android:layout_alignRight="@+id/editTextAddAmount"
         android:layout_alignEnd="@+id/editTextAddAmount"
-        android:paddingLeft="10dp" />
+        android:paddingLeft="10dp"
+        android:visibility="invisible" />
 
     <Button
         android:layout_width="wrap_content"
@@ -131,5 +136,27 @@
         android:layout_alignParentStart="true"
         android:background="#2196F3"
         android:visibility="invisible" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_above="@+id/custom_list"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List Creation"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="36dp"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="15dp" />
 
 </RelativeLayout>
