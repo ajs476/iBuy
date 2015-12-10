@@ -38,6 +38,9 @@
         android:layout_alignParentRight="true"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:id="@+id/checkBox" />
+        android:id="@+id/checkBox"
+        android:button="@drawable/custom_checkbox"
+        android:paddingTop="30dp"
+        android:paddingRight="200dp" />
 
 </RelativeLayout>

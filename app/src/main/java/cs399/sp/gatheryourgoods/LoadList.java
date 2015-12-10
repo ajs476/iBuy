@@ -1,12 +1,17 @@
 package cs399.sp.gatheryourgoods;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 /**
@@ -17,6 +22,8 @@ public class LoadList extends AppCompatActivity {
 
     public ArrayList<Item> results2;
     public CustomListAdapter myAdapter;
+    public View row;
+    public boolean red = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -55,6 +62,13 @@ public class LoadList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // do if list item clicked
+
+                CheckBox cb = (CheckBox) view.findViewById(R.id.checkBox);
+                cb.setChecked(!cb.isChecked());
+
+
+
+
             }
         });
         // create and set the adapter for the list view

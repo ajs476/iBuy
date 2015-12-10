@@ -1,6 +1,7 @@
 package cs399.sp.gatheryourgoods;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -50,7 +52,7 @@ public class CustomListAdapter extends BaseAdapter {
             holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    int getPosition = (Integer)buttonView.getTag();
+                    int getPosition = (Integer) buttonView.getTag();
                     listData.get(getPosition).setSelected(buttonView.isChecked());
 
                 }
@@ -65,6 +67,7 @@ public class CustomListAdapter extends BaseAdapter {
         holder.itemNameView.setText(listData.get(position).getItemName());
         holder.itemCategoryView.setText(listData.get(position).getItemCategory());
         holder.itemAmountView.setText(listData.get(position).getItemAmount());
+
 
         return convertView;
     }

@@ -436,7 +436,7 @@ public class CreateListActivity extends AppCompatActivity {
         // create list of item information to add
         results = new ArrayList<Item>();
         if(results.isEmpty()){
-            noItem.setItemName("Your list is empty");
+            noItem.setItemName("Empty");
             noItem.setItemAmount("0");
             noItem.setItemCategory("Home");
             results.add(noItem);
@@ -739,7 +739,7 @@ public class CreateListActivity extends AppCompatActivity {
 
     public void saveListSharedPreferences(){
         String string_list = item_list_string;
-        if(!string_list.contains("Your list is empty")){
+        if(!string_list.contains("Empty")){
             editor = preferences.edit();
             editor.putString("itemList", string_list);
             editor.apply();

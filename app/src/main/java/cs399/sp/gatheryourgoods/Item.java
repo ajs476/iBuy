@@ -36,6 +36,4 @@ public class Item {
     public void setSelected(boolean selected){
         this.selected = selected;
     }
-
-
 }
